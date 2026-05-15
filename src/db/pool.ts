@@ -5,7 +5,6 @@ export const pool = new Pool({
   connectionString: config.databaseUrl,
   ssl: { rejectUnauthorized: false },
   connectionTimeoutMillis: 15000,
-  family: 4,
 });
 
 pool.on('error', (err) => {
