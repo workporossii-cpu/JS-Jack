@@ -27,3 +27,11 @@
 .animate-dim {
   animation: dimLosers 0.5s var(--ease-out) forwards;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin,
+  .animate-flip,
+  .animate-dim {
+    animation: none;
+  }
+}
