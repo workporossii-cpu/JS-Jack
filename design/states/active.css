@@ -1,0 +1,12 @@
+/* ========== SJ CASINO Active State ========== */
+:root {
+  --active-scale: 0.96;
+  --active-opacity: 0.7;
+}
+
+.activable:active {
+  transform: scale(var(--active-scale));
+  opacity: var(--active-opacity);
+  transition: transform var(--duration-fast, 150ms) var(--ease-default, ease),
+              opacity var(--duration-fast, 150ms) var(--ease-default, ease);
+}
