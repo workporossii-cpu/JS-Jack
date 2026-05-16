@@ -1,0 +1,31 @@
+/* ========== SJ CASINO Notification Animation ========== */
+
+@keyframes notifyIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes notifyOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-notify-in {
+  animation: notifyIn var(--duration-normal) var(--ease-out);
+}
+
+.animate-notify-out {
+  animation: notifyOut var(--duration-normal) var(--ease-in);
+}
