@@ -1,0 +1,73 @@
+/* ========== SJ CASINO Game Layout ========== */
+
+.game-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.game-header {
+  text-align: center;
+}
+
+.game-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.game-bank {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-extrabold, 800);
+  color: var(--color-gold);
+}
+
+.game-timer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.game-timer-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--color-bg-input);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.game-timer-fill {
+  height: 100%;
+  background: var(--color-accent-primary);
+  border-radius: var(--radius-pill);
+  transition: width 1s linear;
+}
+
+.game-slot-area {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+  background: var(--color-bg-input);
+  border-radius: var(--radius-md);
+}
+
+.game-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.game-actions .input {
+  flex: 1;
+}
+
+.game-players {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  max-height: 150px;
+  overflow-y: auto;
+}
