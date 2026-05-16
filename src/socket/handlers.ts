@@ -1,14 +1,31 @@
 import { Server, Socket } from 'socket.io';
+import jwt from 'jsonwebtoken';
 import { ClientEvent, ServerEvent } from './events';
 import * as gameService from '../services/game.service';
 import * as walletService from '../services/wallet.service';
 import * as chatService from '../services/chat.service';
+import { config } from '../config';
+import { JwtPayload } from '../types';
+
+function verifyToken(token: string): JwtPayload | null {
+  try {
+    return jwt.verify(token, config.jwtSecret) as JwtPayload;
+  } catch {
+    return null;
+  }
+}
 
 export function registerHandlers(io: Server, socket: Socket) {
-  // Обработка ставки
+  const userId = socket.data.userId;
+  const username = socket.data.username || 'Player';
+
   socket.on(ClientEvent.PLACE_BET, async (data: { roomId: string; amount: number; token: string }) => {
     try {
-      const userId = socket.data.userId || 'demo_user';
+      const payload = verifyToken(data.token);
+      if (!payload) {
+        socket.emit('error', { message: 'Invalid token' });
+        return;
+      }
 
       const balance = await walletService.getUserBalance(userId);
       const error = gameService.validateBet(data.roomId, data.amount, 0, balance);
@@ -21,10 +38,8 @@ export function registerHandlers(io: Server, socket: Socket) {
       await walletService.deductBalance(userId, data.amount);
       gameService.placeBet(userId, data.roomId, data.amount);
 
-      // Оповещаем всех о новой ставке
       io.emit(ServerEvent.NEW_BET, { roomId: data.roomId });
 
-      // Отправляем игроку его новый баланс
       const newBalance = await walletService.getUserBalance(userId);
       socket.emit(ServerEvent.BALANCE_UPDATE, { balance: newBalance });
     } catch (e: any) {
@@ -32,11 +47,13 @@ export function registerHandlers(io: Server, socket: Socket) {
     }
   });
 
-  // Обработка сообщения в чат
   socket.on(ClientEvent.SEND_MESSAGE, async (data: { text: string; replyTo?: number; token: string }) => {
     try {
-      const userId = socket.data.userId || 'demo_user';
-      const username = socket.data.username || 'Player';
+      const payload = verifyToken(data.token);
+      if (!payload) {
+        socket.emit('error', { message: 'Invalid token' });
+        return;
+      }
 
       const msg = await chatService.sendMessage({
         userId,
@@ -45,7 +62,6 @@ export function registerHandlers(io: Server, socket: Socket) {
         replyTo: data.replyTo || null,
       });
 
-      // Рассылаем сообщение всем
       io.emit(ServerEvent.NEW_MESSAGE, msg);
     } catch (e: any) {
       socket.emit('error', { message: e.message });
