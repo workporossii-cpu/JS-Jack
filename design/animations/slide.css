@@ -1,0 +1,29 @@
+/* ========== SJ CASINO Slide Animations ========== */
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+.animate-slide-up {
+  animation: slideUp var(--duration-normal) var(--ease-out);
+}
+
+.animate-slide-down {
+  animation: slideDown var(--duration-normal) var(--ease-in);
+}
