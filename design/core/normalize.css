@@ -1,0 +1,24 @@
+/* ========== SJ CASINO Normalize ========== */
+html {
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input, select, textarea {
+  outline: none;
+  border: 1px solid var(--color-border-primary, #252830);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-accent-primary, #a970ff);
+}
+
+[hidden] {
+  display: none !important;
+}
