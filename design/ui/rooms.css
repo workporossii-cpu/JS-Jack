@@ -1,0 +1,41 @@
+/* ========== SJ CASINO Rooms UI ========== */
+
+.rooms-bar {
+  display: flex;
+  gap: var(--space-1);
+  margin: var(--space-2) 0;
+}
+
+.room-tab {
+  flex: 1;
+  min-height: var(--touch-target);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.room-tab.active {
+  background: rgba(var(--color-accent-rgb), 0.1);
+  border-color: var(--color-accent-primary);
+  color: var(--color-accent-primary);
+}
+
+.room-tab:active {
+  transform: scale(var(--active-scale));
+}
+
+.room-tab-limits {
+  font-size: 0.625rem;
+  opacity: 0.6;
+}
