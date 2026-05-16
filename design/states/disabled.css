@@ -1,0 +1,7 @@
+/* ========== SJ CASINO Disabled State ========== */
+.disabled,
+[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
