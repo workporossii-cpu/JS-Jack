@@ -1,0 +1,12 @@
+/* ========== SJ CASINO Core Variables ========== */
+@import '../tokens/colors.css';
+@import '../tokens/spacing.css';
+@import '../tokens/zindex.css';
+@import '../tokens/radius.css';
+@import '../tokens/motion.css';
+
+:root {
+  --touch-target: 44px;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
