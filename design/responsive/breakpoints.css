@@ -1,0 +1,7 @@
+/* ========== SJ CASINO Breakpoints ========== */
+:root {
+  --bp-mobile: 320px;
+  --bp-phablet: 420px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+}
