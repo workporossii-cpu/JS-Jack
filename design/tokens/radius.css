@@ -1,0 +1,15 @@
+/* ========== SJ CASINO Radius Tokens ========== */
+:root {
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+  --radius-circle: 50%;
+
+  /* Логические радиусы для RTL */
+  --radius-start-start: var(--radius-sm);
+  --radius-start-end: var(--radius-sm);
+  --radius-end-start: var(--radius-sm);
+  --radius-end-end: var(--radius-sm);
+}
