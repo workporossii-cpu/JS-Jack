@@ -1,0 +1,13 @@
+/* ========== SJ CASINO GPU Acceleration ========== */
+.gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.gpu-opacity {
+  will-change: opacity;
+}
+
+.gpu-transform {
+  will-change: transform;
+}
