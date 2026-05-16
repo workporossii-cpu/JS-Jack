@@ -1,0 +1,29 @@
+/* ========== SJ CASINO Spin Animations (Roulette) ========== */
+
+@keyframes spinSlot {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--spin-distance, -5000px)); }
+}
+
+@keyframes flipWinner {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+@keyframes dimLosers {
+  from { opacity: 1; }
+  to { opacity: 0.25; }
+}
+
+.animate-spin {
+  animation: spinSlot var(--spin-duration, 10s) cubic-bezier(0.02, 0.95, 0.08, 1);
+}
+
+.animate-flip {
+  animation: flipWinner 0.7s var(--ease-in-out);
+}
+
+.animate-dim {
+  animation: dimLosers 0.5s var(--ease-out) forwards;
+}
