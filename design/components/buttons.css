@@ -1,0 +1,83 @@
+/* ========== SJ CASINO Buttons ========== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-default),
+              opacity var(--duration-fast) var(--ease-default);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(var(--active-scale));
+  opacity: var(--active-opacity);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Варианты */
+.btn-primary {
+  background: var(--color-accent-primary);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.btn-gold {
+  background: var(--color-gold);
+  color: #000;
+}
+
+.btn-danger {
+  background: var(--color-red);
+  color: #fff;
+}
+
+/* Размеры */
+.btn-sm {
+  min-height: 36px;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.btn-lg {
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-lg);
+}
+
+/* Полная ширина */
+.btn-full {
+  width: 100%;
+}
+
+/* Круглая кнопка (иконка) */
+.btn-icon {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  border-radius: var(--radius-circle);
+}
