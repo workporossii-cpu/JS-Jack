@@ -1,0 +1,29 @@
+/* ========== SJ CASINO Loading State ========== */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--color-black-rgb, 0, 0, 0), 0.4);
+  border-radius: inherit;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-card, #1a1d25) 0%,
+    var(--color-bg-panel, #151922) 50%,
+    var(--color-bg-card, #1a1d25) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
