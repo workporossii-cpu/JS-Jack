@@ -1,0 +1,6 @@
+/* ========== SJ CASINO Focus State ========== */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--color-accent-primary, #a970ff);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm, 8px);
+}
