@@ -1,0 +1,65 @@
+/* ========== SJ CASINO Mobile Layout ========== */
+
+.app-shell {
+  width: 100%;
+  max-width: var(--bp-phablet, 420px);
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-primary);
+  position: relative;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  padding-top: var(--safe-area-top);
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border-primary);
+  min-height: 48px;
+}
+
+.app-content {
+  flex: 1;
+  padding: var(--space-3);
+  padding-bottom: calc(var(--touch-target) + var(--space-6) + var(--safe-area-bottom));
+  overflow-y: auto;
+}
+
+.app-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--bp-phablet, 420px);
+  display: flex;
+  justify-content: space-around;
+  padding: var(--space-2) var(--space-2) var(--safe-area-bottom);
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-primary);
+  z-index: var(--z-sticky);
+}
+
+.app-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  padding: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.app-nav-item.active {
+  color: var(--color-accent-primary);
+}
