@@ -1,4 +1,9 @@
 /* ========== SJ CASINO Loading State ========== */
+
+[aria-busy="true"] {
+  cursor: progress;
+}
+
 .loading {
   position: relative;
   pointer-events: none;
@@ -26,4 +31,10 @@
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
 }
