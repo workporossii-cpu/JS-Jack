@@ -1,45 +1,28 @@
-/* ========== SJ CASINO Design System v2.0 ========== */
-
-/* Core */
 @import './core/reset.css';
 @import './core/normalize.css';
 @import './core/variables.css';
 @import './core/utilities.css';
-
-/* States */
 @import './states/active.css';
 @import './states/disabled.css';
 @import './states/loading.css';
 @import './states/focus.css';
-
-/* Responsive */
 @import './responsive/breakpoints.css';
 @import './responsive/safe-area.css';
-
-/* Performance */
 @import './performance/gpu.css';
 @import './performance/reduced-motion.css';
-
-/* Components */
 @import './components/buttons.css';
 @import './components/cards.css';
 @import './components/inputs.css';
 @import './components/modals.css';
 @import './components/badges.css';
-
-/* Animations */
 @import './animations/fade.css';
 @import './animations/slide.css';
 @import './animations/pulse.css';
 @import './animations/spin.css';
 @import './animations/shake.css';
 @import './animations/notification.css';
-
-/* Layouts */
 @import './layouts/mobile.css';
 @import './layouts/game-layout.css';
-
-/* UI Blocks */
 @import './ui/wallet.css';
 @import './ui/chat.css';
 @import './ui/roulette.css';
