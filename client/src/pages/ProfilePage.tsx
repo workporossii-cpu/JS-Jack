@@ -1,9 +1,6 @@
 import { useUserStore } from '../store/userStore';
-import BetHistory from '../components/BetHistory';
 
-interface Props { betHistory: any[] }
-
-export default function ProfilePage({ betHistory }: Props) {
+export default function ProfilePage() {
   const { username, balance, totalBets, totalDeposit } = useUserStore();
   return (
     <div className="profile-page">
@@ -23,7 +20,6 @@ export default function ProfilePage({ betHistory }: Props) {
           <span className="profile-stat-value">⭐ {totalDeposit.toLocaleString()}</span>
         </div>
       </div>
-      <BetHistory bets={betHistory} />
     </div>
   );
 }
