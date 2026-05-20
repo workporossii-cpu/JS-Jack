@@ -9,31 +9,17 @@ const RANKS = [
   { name: 'Бог', bets: 1500000, dep: 500000, bonus: 10000 },
 ];
 
-interface RanksTableProps {
-  currentRankIndex: number;
-}
+interface Props { currentRankIndex: number }
 
-export function RanksTable({ currentRankIndex }: RanksTableProps) {
+export default function RanksTable({ currentRankIndex }: Props) {
   return (
-    <div className="card" style={{ marginTop: 'var(--space-4)' }}>
-      <h3 className="card-title" style={{ textAlign: 'center', marginBottom: 'var(--space-3)' }}>🏅 Таблица рангов</h3>
-      {RANKS.map((rank, i) => (
-        <div
-          key={rank.name}
-          style={{
-            padding: 'var(--space-2)',
-            borderBottom: '1px solid var(--color-border-secondary)',
-            background: i === currentRankIndex ? 'rgba(var(--color-accent-rgb), 0.1)' : 'transparent',
-            borderRadius: i === currentRankIndex ? 'var(--radius-md)' : 0,
-          }}
-        >
-          <strong>{rank.name}</strong>
-          <span style={{ marginLeft: 'var(--space-2)', fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)' }}>
-            Ставок: {rank.bets.toLocaleString()} / Деп: {rank.dep.toLocaleString()}
-          </span>
-          <span style={{ marginLeft: 'var(--space-2)', color: 'var(--color-gold)', fontWeight: 'var(--font-semibold)' }}>
-            +{rank.bonus.toLocaleString()}
-          </span>
+    <div className="card" style={{marginTop:'var(--space-4)'}}>
+      <h3 className="card-title" style={{textAlign:'center'}}>🏅 Таблица рангов</h3>
+      {RANKS.map((r, i) => (
+        <div key={r.name} style={{padding:'var(--space-2)',borderBottom:'1px solid var(--color-border-secondary)',background:i===currentRankIndex?'rgba(var(--color-accent-rgb),0.1)':'transparent',borderRadius:i===currentRankIndex?'var(--radius-md)':0}}>
+          <strong>{r.name}</strong>
+          <span style={{marginLeft:8,fontSize:'var(--text-sm)',color:'var(--color-text-muted)'}}>Ставок: {r.bets.toLocaleString()} / Деп: {r.dep.toLocaleString()}</span>
+          <span style={{marginLeft:8,color:'var(--color-gold)',fontWeight:'var(--font-semibold)'}}>+{r.bonus.toLocaleString()}</span>
         </div>
       ))}
     </div>
