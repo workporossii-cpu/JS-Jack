@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSocket } from './hooks/useSocket';
 import GamePage from './pages/GamePage';
 import WalletPage from './pages/WalletPage';
@@ -14,33 +14,24 @@ export default function App() {
   const [chatOpen, setChatOpen] = useState(false);
   const [balance, setBalance] = useState(0);
 
-  socket?.on('balance_update', ({ balance }: any) => setBalance(balance));
+  useEffect(() => {
+    if (!socket) return;
+    const handler = ({ balance }: any) => setBalance(balance);
+    socket.on('balance_update', handler);
+    return () => { socket.off('balance_update', handler); };
+  }, [socket]);
 
   return (
     <div style={{
-      width: '100%',
-      maxWidth: '420px',
-      minHeight: '100vh',
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      background: '#0b0d12',
-      color: '#e4e4e7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-      position: 'relative',
-      paddingBottom: '100px'
+      width: '100%', maxWidth: '420px', minHeight: '100vh', margin: '0 auto',
+      display: 'flex', flexDirection: 'column', background: '#0b0d12',
+      color: '#e4e4e7', fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+      position: 'relative', paddingBottom: '100px'
     }}>
       <header style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 200,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '12px 16px',
-        background: '#111318',
-        borderBottom: '1px solid #252830',
-        minHeight: '48px'
+        position: 'sticky', top: 0, zIndex: 200, display: 'flex',
+        alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px',
+        background: '#111318', borderBottom: '1px solid #252830', minHeight: '48px'
       }}>
         <span style={{ fontSize: '20px', fontWeight: 700, color: '#a970ff', letterSpacing: '2px' }}>SJ</span>
       </header>
