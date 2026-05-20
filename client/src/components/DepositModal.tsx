@@ -1,46 +1,43 @@
 import { useState } from 'react';
 
-interface DepositModalProps {
-  onClose: () => void;
-  onSubmit: (method: string, amount: number) => void;
-}
+interface Props { onClose: () => void }
 
-export function DepositModal({ onClose, onSubmit }: DepositModalProps) {
-  const [method, setMethod] = useState('sbp');
+export default function DepositModal({ onClose }: Props) {
+  const [method, setMethod] = useState('stars');
   const [amount, setAmount] = useState('');
 
-  const handleSubmit = () => {
+  const handle = () => {
     const amt = parseFloat(amount);
     if (!amt || amt <= 0) return;
-    onSubmit(method, amt);
+    if (method === 'stars') {
+      fetch('/api/stars/deposit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
+        body: JSON.stringify({ amount: amt })
+      }).then(r => r.json()).then(data => {
+        if (data.invoiceLink && window.Telegram?.WebApp?.openInvoice) {
+          window.Telegram.WebApp.openInvoice(data.invoiceLink, (status: string) => {
+            if (status === 'paid') { alert('✅ Пополнено на ' + amt + ' ⭐'); onClose(); }
+          });
+        }
+      });
+    }
     onClose();
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <span className="modal-title">Пополнение</span>
-          <button className="modal-close" onClick={onClose}>×</button>
-        </div>
-
-        <select className="select" value={method} onChange={(e) => setMethod(e.target.value)} style={{ marginBottom: 'var(--space-3)' }}>
-          <option value="sbp">СБП (от 1000₽)</option>
-          <option value="card">Банковская карта (от 3000₽)</option>
-          <option value="ton">TON (от 5 TON)</option>
-          <option value="usdt">USDT TRC-20 (от 10$)</option>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <div className="modal-header"><span className="modal-title">Пополнение ⭐</span><button className="modal-close" onClick={onClose}>×</button></div>
+        <select className="select" value={method} onChange={e => setMethod(e.target.value)} style={{marginBottom:12}}>
+          <option value="stars">Telegram Stars</option>
+          <option value="sbp">СБП</option>
+          <option value="card">Карта</option>
+          <option value="ton">TON</option>
+          <option value="usdt">USDT</option>
         </select>
-
-        <input
-          className="input"
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="Сумма пополнения"
-          style={{ marginBottom: 'var(--space-3)' }}
-        />
-
-        <button className="btn btn-primary btn-full" onClick={handleSubmit}>Пополнить</button>
+        <input className="input" type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="Сумма" style={{marginBottom:12}} />
+        <button className="btn btn-primary btn-full" onClick={handle}>Пополнить</button>
       </div>
     </div>
   );
