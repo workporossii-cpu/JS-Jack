@@ -11,7 +11,10 @@ export function useSocket(): Socket | null {
     const s = io(SOCKET_URL, { auth: { token: TOKEN } });
     s.on('connect', () => console.log('🔌 Socket connected'));
     setSocket(s);
-    return () => { s.disconnect(); };
+
+    return () => {
+      s.disconnect();
+    };
   }, []);
 
   return socket;
