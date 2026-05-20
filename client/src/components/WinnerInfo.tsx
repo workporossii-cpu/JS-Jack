@@ -1,24 +1,12 @@
-interface WinnerInfoProps {
-  winner: {
-    name: string;
-    amount: number;
-    ticket?: number;
-    chance?: string;
-  } | null;
-  visible: boolean;
-}
+interface Props { winner: { name: string; amount: number; ticket?: number } | null; visible: boolean }
 
-export function WinnerInfo({ winner, visible }: WinnerInfoProps) {
+export default function WinnerInfo({ winner, visible }: Props) {
   if (!visible || !winner) return null;
-
   return (
     <div className="roulette-winner-info animate-fade-in">
       <div className="roulette-winner-name">{winner.name}</div>
-      <div className="roulette-winner-chance">
-        {winner.chance && `Шанс: ${winner.chance}%`}
-        {winner.ticket && ` | Билет: #${winner.ticket}`}
-      </div>
-      <div className="roulette-winner-amount">+{winner.amount.toLocaleString()} мон.</div>
+      {winner.ticket && <div style={{fontSize:'var(--text-xs)',color:'var(--color-text-muted)'}}>Билет: #{winner.ticket}</div>}
+      <div className="roulette-winner-amount">+{winner.amount.toLocaleString()} ⭐</div>
     </div>
   );
 }
