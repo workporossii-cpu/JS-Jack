@@ -1,42 +1,26 @@
 import { useEffect, useState, useRef } from 'react';
-import type { Socket } from 'socket.io-client';
+import { useSocket } from '../hooks/useSocket';
 
-interface ChatMessage {
-  id: number;
-  userId: string;
-  username: string;
-  text: string;
-  replyTo: number | null;
-}
+interface Props { onClose: () => void }
 
-interface ChatPanelProps {
-  socket: Socket | null;
-  onClose: () => void;
-}
-
-export function ChatPanel({ socket, onClose }: ChatPanelProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+export default function ChatPanel({ onClose }: Props) {
+  const socket = useSocket();
+  const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
-  const token = localStorage.getItem('token') || '';
 
   useEffect(() => {
-    if (!socket) return;
-    socket.on('new_message', (msg: ChatMessage) => {
-      setMessages((prev) => [...prev, msg]);
-    });
-    return () => { socket.off('new_message'); };
+    socket?.on('new_message', (msg: any) => setMessages(prev => [...prev, msg]));
+    return () => { socket?.off('new_message'); };
   }, [socket]);
 
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight;
-    }
+    containerRef.current?.scrollTo({ top: containerRef.current.scrollHeight });
   }, [messages]);
 
   const send = () => {
-    if (!input.trim() || !socket) return;
-    socket.emit('send_message', { text: input, token });
+    if (!input.trim()) return;
+    socket?.emit('send_message', { text: input, token: localStorage.getItem('token') || 'demo' });
     setInput('');
   };
 
@@ -47,26 +31,15 @@ export function ChatPanel({ socket, onClose }: ChatPanelProps) {
         <button className="chat-close" onClick={onClose}>×</button>
       </div>
       <div className="chat-messages" ref={containerRef}>
-        {messages.map((msg) => (
-          <div key={msg.id} className="chat-msg">
-            <div className="chat-msg-avatar">{msg.username.substring(0, 2).toUpperCase()}</div>
-            <div className="chat-msg-body">
-              <div className="chat-msg-author">{msg.username}</div>
-              {msg.text}
-            </div>
+        {messages.map((msg, i) => (
+          <div key={i} className="chat-msg">
+            <div className="chat-msg-avatar">{msg.username?.substring(0,2).toUpperCase()}</div>
+            <div className="chat-msg-body">{msg.text}</div>
           </div>
         ))}
       </div>
       <div className="chat-input-row">
-        <input
-          className="input"
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && send()}
-          placeholder="Сообщение..."
-          maxLength={200}
-        />
+        <input className="input" value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Сообщение..." />
         <button className="btn btn-primary" onClick={send}>→</button>
       </div>
     </div>
