@@ -1,34 +1,14 @@
-interface Transaction {
-  id: number;
-  type: string;
-  amount: number;
-  status: string;
-  created_at?: string;
-  fee?: number;
-}
+interface Props { transactions: any[] }
 
-interface TransactionsListProps {
-  transactions: Transaction[];
-}
-
-export function TransactionsList({ transactions }: TransactionsListProps) {
-  if (!transactions.length) {
-    return <p style={{ textAlign: 'center', color: 'var(--color-text-muted)', fontSize: 'var(--text-sm)' }}>Пока нет транзакций</p>;
-  }
-
+export default function TransactionsList({ transactions }: Props) {
+  if (!transactions.length) return <p style={{textAlign:'center',color:'var(--color-text-muted)'}}>Нет транзакций</p>;
   return (
     <div>
-      {transactions.map((tx) => (
-        <div key={tx.id} className="wallet-tx-item">
-          <div>
-            <span className="wallet-tx-type">{tx.type} #{tx.id}</span>
-            <div className="wallet-tx-date">{tx.created_at ? new Date(tx.created_at).toLocaleString('ru-RU') : ''}</div>
-          </div>
-          <div>
-            <div className="wallet-tx-amount">{tx.amount.toLocaleString()} мон.</div>
-            <span className={`wallet-tx-status ${tx.status}`}>{tx.status}</span>
-          </div>
-          {tx.fee && <div className="wallet-tx-date">Комиссия: {tx.fee} мон.</div>}
+      {transactions.map((tx, i) => (
+        <div key={i} className="wallet-tx-item">
+          <span className="wallet-tx-type">{tx.type}</span>
+          <span>{tx.amount.toLocaleString()} ⭐</span>
+          <span className={`wallet-tx-status ${tx.status}`}>{tx.status}</span>
         </div>
       ))}
     </div>
