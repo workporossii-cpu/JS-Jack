@@ -1,0 +1,7 @@
+.profile-page{display:flex;flex-direction:column;gap:var(--space-4);text-align:center}
+.profile-avatar{width:72px;height:72px;border-radius:var(--radius-circle);display:flex;align-items:center;justify-content:center;font-size:var(--text-xl);font-weight:var(--font-bold);color:#fff;margin:0 auto;overflow:hidden}
+.profile-nick{font-size:var(--text-lg);font-weight:var(--font-semibold);color:var(--color-text-primary)}
+.profile-stats{display:flex;flex-direction:column;gap:var(--space-2)}
+.profile-stat-row{display:flex;justify-content:space-between;align-items:center;padding:var(--space-2) var(--space-3);background:var(--color-bg-card);border-radius:var(--radius-md)}
+.profile-stat-label{font-size:var(--text-sm);color:var(--color-text-secondary)}
+.profile-stat-value{font-size:var(--text-lg);font-weight:var(--font-bold);color:var(--color-text-primary)}
